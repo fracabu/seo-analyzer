@@ -35,21 +35,14 @@ Questo progetto è progettato per essere eseguito come un'applicazione web stati
 
 L'applicazione si aspetta che la chiave API di Gemini sia disponibile in una variabile d'ambiente `process.env.API_KEY`. In un ambiente di produzione (come Vercel, Netlify, etc.), questa variabile viene configurata nelle impostazioni del sito.
 
-Per lo **sviluppo locale**, un modo semplice per simulare questa variabile è modificare temporaneamente il file `index.html` ( **non committare mai la tua chiave API nel controllo di versione!** ).
+Per lo **sviluppo locale**, crea un file `.env` nella root del progetto:
 
-Apri `index.html` e aggiungi il seguente script all'interno del tag `<head>`, prima degli altri tag `<script>`:
-
-```html
-<script>
-  // DA USARE SOLO PER LO SVILUPPO LOCALE
-  // Sostituisci "LA_TUA_CHIAVE_API_QUI" con la tua vera chiave API di Gemini.
-  window.process = {
-    env: {
-      API_KEY: "LA_TUA_CHIAVE_API_QUI"
-    }
-  };
-</script>
+```bash
+# .env
+GEMINI_API_KEY=LA_TUA_CHIAVE_API_QUI
 ```
+
+**IMPORTANTE:** Il file `.env` è già incluso nel `.gitignore` e non sarà committato nel repository.
 
 **2. Avvia un Server Web Locale**
 
@@ -74,6 +67,23 @@ python -m SimpleHTTPServer
 **3. Apri l'App**
 
 Una volta che il server è in esecuzione, apri il tuo browser e naviga all'URL fornito (es. `http://localhost:3000` o `http://localhost:8000`). Ora puoi iniziare ad analizzare i siti web!
+
+## 🚀 Deployment
+
+### Vercel
+1. Collega il repository GitHub a Vercel
+2. Nelle impostazioni del progetto Vercel, aggiungi la variabile d'ambiente:
+   - **Name**: `GEMINI_API_KEY`
+   - **Value**: La tua chiave API di Google Gemini
+3. Fai il re-deploy del progetto
+
+### Netlify
+1. Collega il repository GitHub a Netlify
+2. Vai su Site settings → Environment variables
+3. Aggiungi la variabile d'ambiente:
+   - **Key**: `GEMINI_API_KEY`
+   - **Value**: La tua chiave API di Google Gemini
+4. Fai il re-deploy del progetto
 
 ## 💡 Come Funziona
 
