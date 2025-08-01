@@ -10,13 +10,14 @@ import ResultCard from './components/ResultCard';
 const App: React.FC = () => {
     const [url, setUrl] = useState<string>('');
     const [keyword, setKeyword] = useState<string>('');
+    const [apiKey, setApiKey] = useState<string>('');
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
     const [results, setResults] = useState<SeoAnalysisResult | null>(null);
 
     const handleAnalyze = useCallback(async () => {
-        if (!url || !keyword) {
-            setError('Please provide both a URL and a keyword.');
+        if (!url || !keyword || !apiKey) {
+            setError('Please provide URL, keyword, and API key.');
             return;
         }
         
@@ -33,7 +34,7 @@ const App: React.FC = () => {
         setResults(null);
 
         try {
-            const analysisResults = await analyzeSeo(url, keyword);
+            const analysisResults = await analyzeSeo(url, keyword, apiKey);
             setResults(analysisResults);
         } catch (e) {
             console.error(e);
@@ -41,7 +42,7 @@ const App: React.FC = () => {
         } finally {
             setIsLoading(false);
         }
-    }, [url, keyword]);
+    }, [url, keyword, apiKey]);
 
     return (
         <div className="min-h-screen bg-slate-900 text-slate-200 font-sans flex flex-col items-center p-4 sm:p-6 lg:p-8">
@@ -73,7 +74,28 @@ const App: React.FC = () => {
                                 disabled={isLoading}
                             />
                         </div>
-                        <Button onClick={handleAnalyze} disabled={isLoading || !url || !keyword}>
+                        <div className="mb-6">
+                            <Input
+                                id="apiKey"
+                                label="Google Gemini API Key"
+                                placeholder="AIza..."
+                                value={apiKey}
+                                onChange={(e) => setApiKey(e.target.value)}
+                                disabled={isLoading}
+                            />
+                            <p className="text-sm text-slate-400 mt-2">
+                                Get your free API key from{' '}
+                                <a 
+                                    href="https://aistudio.google.com/app/apikey" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer" 
+                                    className="text-blue-400 hover:text-blue-300 underline"
+                                >
+                                    Google AI Studio
+                                </a>
+                            </p>
+                        </div>
+                        <Button onClick={handleAnalyze} disabled={isLoading || !url || !keyword || !apiKey}>
                             {isLoading ? 'Analyzing...' : 'Analyze'}
                         </Button>
                         {error && <p className="text-red-400 mt-4 text-center">{error}</p>}

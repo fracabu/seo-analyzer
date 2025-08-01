@@ -2,12 +2,6 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import type { SeoAnalysisResult } from '../types';
 
-if (!process.env.API_KEY) {
-    throw new Error("API_KEY environment variable not set");
-}
-
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-
 const responseSchema = {
     type: Type.OBJECT,
     properties: {
@@ -77,7 +71,12 @@ const responseSchema = {
 };
 
 
-export const analyzeSeo = async (url: string, keyword: string): Promise<SeoAnalysisResult> => {
+export const analyzeSeo = async (url: string, keyword: string, apiKey: string): Promise<SeoAnalysisResult> => {
+    if (!apiKey) {
+        throw new Error("API key is required");
+    }
+
+    const ai = new GoogleGenAI({ apiKey });
     const prompt = `
         Act as an expert on-page SEO analyzer. Analyze the content of the website at the URL "${url}" for the target keyword "${keyword}".
         Based on your knowledge of the page's content, provide a detailed analysis of the following metrics.

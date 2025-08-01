@@ -22,29 +22,16 @@ Un semplice strumento di analisi SEO on-page che utilizza l'API di Gemini per fo
 
 ## ⚙️ Come Avviare il Progetto
 
-Questo progetto è progettato per essere eseguito come un'applicazione web statica senza un processo di build complesso.
+Questo progetto è progettato per essere eseguito come un'applicazione web statica.
 
 ### Prerequisiti
 
-- **Node.js:** Consigliato per l'uso di `npx`.
-- **Chiave API di Google Gemini:** È necessaria una chiave API valida. Puoi ottenerne una gratuitamente da [Google AI Studio](https://aistudio.google.com/app/apikey).
+- **Node.js:** Per lo sviluppo locale (consigliato per l'uso di `npx`).
+- **Chiave API di Google Gemini:** Ogni utente deve avere la propria chiave API. Puoi ottenerne una gratuitamente da [Google AI Studio](https://aistudio.google.com/app/apikey).
 
 ### Installazione e Avvio
 
-**1. Configurazione della Chiave API**
-
-L'applicazione si aspetta che la chiave API di Gemini sia disponibile in una variabile d'ambiente `process.env.API_KEY`. In un ambiente di produzione (come Vercel, Netlify, etc.), questa variabile viene configurata nelle impostazioni del sito.
-
-Per lo **sviluppo locale**, crea un file `.env` nella root del progetto:
-
-```bash
-# .env
-GEMINI_API_KEY=LA_TUA_CHIAVE_API_QUI
-```
-
-**IMPORTANTE:** Il file `.env` è già incluso nel `.gitignore` e non sarà committato nel repository.
-
-**2. Avvia un Server Web Locale**
+**1. Avvia un Server Web Locale**
 
 Poiché i browser applicano restrizioni di sicurezza (CORS) sul caricamento di moduli JavaScript (`type="module"`) dal file system locale, è necessario servire i file tramite un server web.
 
@@ -64,30 +51,26 @@ python -m http.server
 python -m SimpleHTTPServer
 ```
 
-**3. Apri l'App**
+**2. Apri l'App**
 
-Una volta che il server è in esecuzione, apri il tuo browser e naviga all'URL fornito (es. `http://localhost:3000` o `http://localhost:8000`). Ora puoi iniziare ad analizzare i siti web!
+Una volta che il server è in esecuzione, apri il tuo browser e naviga all'URL fornito (es. `http://localhost:3000` o `http://localhost:8000`). 
+
+**3. Inserisci la tua API Key**
+
+Nell'interfaccia dell'app, dovrai inserire la tua chiave API di Google Gemini nel campo dedicato. Puoi ottenere una chiave gratuita da [Google AI Studio](https://aistudio.google.com/app/apikey).
 
 ## 🚀 Deployment
 
-### Vercel
-1. Collega il repository GitHub a Vercel
-2. Nelle impostazioni del progetto Vercel, aggiungi la variabile d'ambiente:
-   - **Name**: `GEMINI_API_KEY`
-   - **Value**: La tua chiave API di Google Gemini
-3. Fai il re-deploy del progetto
+Questa app può essere deployata su qualsiasi piattaforma di hosting statico senza bisogno di configurare variabili d'ambiente, poiché ogni utente inserisce la propria API key direttamente nell'interfaccia.
 
-### Netlify
-1. Collega il repository GitHub a Netlify
-2. Vai su Site settings → Environment variables
-3. Aggiungi la variabile d'ambiente:
-   - **Key**: `GEMINI_API_KEY`
-   - **Value**: La tua chiave API di Google Gemini
-4. Fai il re-deploy del progetto
+### Vercel/Netlify/GitHub Pages
+1. Collega il repository GitHub alla piattaforma
+2. Il deploy avverrà automaticamente
+3. Non sono necessarie variabili d'ambiente
 
 ## 💡 Come Funziona
 
-1.  L'utente inserisce l'URL di un sito web e una parola chiave target.
+1.  L'utente inserisce l'URL di un sito web, una parola chiave target e la propria API key di Google Gemini.
 2.  Al click sul pulsante "Analizza", l'applicazione costruisce un prompt specifico per il modello Gemini.
 3.  Il prompt istruisce il modello `gemini-2.5-flash` a comportarsi come un esperto SEO e ad analizzare la pagina fornita.
 4.  Per garantire una risposta affidabile e strutturata, la richiesta API include uno `responseSchema` che definisce il formato JSON esatto dell'output desiderato.
