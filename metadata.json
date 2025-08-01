@@ -1,0 +1,6 @@
+{
+  "name": "Copy of Gemini SEO Analyzer",
+  "description": "A simple on-page SEO analyzer tool that uses the Gemini API to provide insights on a website's title, meta description, headers, images, and word count based on a target URL and keyword.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}
