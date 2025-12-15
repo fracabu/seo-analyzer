@@ -1,78 +1,86 @@
-# Gemini SEO Analyzer
+<h1 align="center">SEO Analyzer</h1>
+<h3 align="center">AI-Powered On-Page SEO Tool</h3>
 
-Un semplice strumento di analisi SEO on-page che utilizza l'API di Gemini per fornire approfondimenti su titolo, meta description, intestazioni, immagini e conteggio delle parole di un sito web, basandosi su un URL e una parola chiave target.
+<p align="center">
+  <em>Analyze websites with Google Gemini AI</em>
+</p>
 
-*(Immagine dimostrativa dell'interfaccia utente: Un design pulito e moderno con tema scuro. Un modulo centrale permette di inserire URL e parola chiave, mentre i risultati dell'analisi appaiono sotto forma di schede informative.)*
+<p align="center">
+  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Gemini-4285F4?style=flat-square&logo=google&logoColor=white" alt="Gemini" />
+  <img src="https://img.shields.io/badge/SEO-FF5722?style=flat-square" alt="SEO" />
+</p>
 
-## ✨ Funzionalità
+<p align="center">
+  :gb: <a href="#english">English</a> | :it: <a href="#italiano">Italiano</a>
+</p>
 
-- **Analisi del Tag Title:** Controlla la lunghezza ottimale (50-60 caratteri) e la presenza della parola chiave.
-- **Analisi della Meta Description:** Verifica la lunghezza ottimale (120-155 caratteri) e la presenza della parola chiave.
-- **Struttura dei Tag H1:** Controlla che ci sia un unico tag H1 e che contenga la parola chiave.
-- **Attributi Alt delle Immagini:** Calcola la percentuale di immagini con testi alternativi.
-- **Conteggio Parole:** Fornisce il numero totale di parole nella pagina, utile per valutare la profondità del contenuto.
-- **Posizionamento della Parola Chiave:** Riassume la presenza della parola chiave nei tre elementi on-page più importanti: titolo, meta description e H1.
+---
 
-## 🚀 Stack Tecnologico
+<a name="english"></a>
+## :gb: English
 
-- **Frontend:** React, TypeScript
-- **API:** Google Gemini (`@google/genai`)
-- **Styling:** Tailwind CSS
-- **Servito come:** App statica con `importmap` per la gestione dei moduli ES.
+### Overview
 
-## ⚙️ Come Avviare il Progetto
+An on-page SEO tool powered by Google Gemini, offering detailed analysis of website elements like title, meta, H1s, and images for target keywords.
 
-Questo progetto è progettato per essere eseguito come un'applicazione web statica.
+### Features
 
-### Prerequisiti
+- **AI Analysis** - Google Gemini powered insights
+- **Title & Meta** - Analyze title tags and descriptions
+- **H1 Analysis** - Check heading hierarchy
+- **Image Optimization** - Alt text and size analysis
+- **Keyword Focus** - Target keyword evaluation
 
-- **Node.js:** Per lo sviluppo locale (consigliato per l'uso di `npx`).
-- **Chiave API di Google Gemini:** Ogni utente deve avere la propria chiave API. Puoi ottenerne una gratuitamente da [Google AI Studio](https://aistudio.google.com/app/apikey).
-
-### Installazione e Avvio
-
-**1. Avvia un Server Web Locale**
-
-Poiché i browser applicano restrizioni di sicurezza (CORS) sul caricamento di moduli JavaScript (`type="module"`) dal file system locale, è necessario servire i file tramite un server web.
-
-Se hai Node.js installato, il modo più semplice è usare `serve`. Esegui questo comando dalla directory principale del progetto:
+### Quick Start
 
 ```bash
-npx serve
+git clone https://github.com/fracabu/seo-analyzer.git
+cd seo-analyzer
+npm install
+npm run dev
 ```
 
-In alternativa, puoi usare l'estensione "Live Server" per VS Code o il server integrato di Python:
+---
+
+<a name="italiano"></a>
+## :it: Italiano
+
+### Panoramica
+
+Strumento SEO on-page potenziato da Google Gemini, offre analisi dettagliata di elementi sito come title, meta, H1 e immagini per keyword target.
+
+### Funzionalita
+
+- **Analisi AI** - Insights con Google Gemini
+- **Title & Meta** - Analizza title tag e descrizioni
+- **Analisi H1** - Verifica gerarchia heading
+- **Ottimizzazione Immagini** - Analisi alt text e dimensioni
+- **Focus Keyword** - Valutazione keyword target
+
+### Avvio Rapido
 
 ```bash
-# Per Python 3
-python -m http.server
-
-# Per Python 2
-python -m SimpleHTTPServer
+git clone https://github.com/fracabu/seo-analyzer.git
+cd seo-analyzer
+npm install
+npm run dev
 ```
 
-**2. Apri l'App**
+---
 
-Una volta che il server è in esecuzione, apri il tuo browser e naviga all'URL fornito (es. `http://localhost:3000` o `http://localhost:8000`). 
+## Tech Stack
 
-**3. Inserisci la tua API Key**
+- TypeScript, Google Gemini API
 
-Nell'interfaccia dell'app, dovrai inserire la tua chiave API di Google Gemini nel campo dedicato. Puoi ottenere una chiave gratuita da [Google AI Studio](https://aistudio.google.com/app/apikey).
+## License
 
-## 🚀 Deployment
+MIT
 
-Questa app può essere deployata su qualsiasi piattaforma di hosting statico senza bisogno di configurare variabili d'ambiente, poiché ogni utente inserisce la propria API key direttamente nell'interfaccia.
+---
 
-### Vercel/Netlify/GitHub Pages
-1. Collega il repository GitHub alla piattaforma
-2. Il deploy avverrà automaticamente
-3. Non sono necessarie variabili d'ambiente
-
-## 💡 Come Funziona
-
-1.  L'utente inserisce l'URL di un sito web, una parola chiave target e la propria API key di Google Gemini.
-2.  Al click sul pulsante "Analizza", l'applicazione costruisce un prompt specifico per il modello Gemini.
-3.  Il prompt istruisce il modello `gemini-2.5-flash` a comportarsi come un esperto SEO e ad analizzare la pagina fornita.
-4.  Per garantire una risposta affidabile e strutturata, la richiesta API include uno `responseSchema` che definisce il formato JSON esatto dell'output desiderato.
-5.  L'API di Gemini restituisce i dati di analisi in formato JSON.
-6.  L'applicazione interpreta i dati e li visualizza nell'interfaccia utente, utilizzando indicatori visivi (verde, giallo, rosso) per evidenziare i punti di forza e le aree di miglioramento.
+<p align="center">
+  <a href="https://github.com/fracabu">
+    <img src="https://img.shields.io/badge/Made_by-fracabu-8B5CF6?style=flat-square" alt="Made by fracabu" />
+  </a>
+</p>
